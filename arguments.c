@@ -6,7 +6,7 @@
 /*   By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:06:46 by eduarodr          #+#    #+#             */
-/*   Updated: 2023/05/05 17:05:00 by eduarodr         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:19:23 by eduarodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void argument1(t_pipe pip, char **env, int *fd, char **av)
     char  *getp;
     char **command;
 
+    close(fd[0]);
     command = ft_split(av[2], ' ');
     dup2(pip.file1, STDIN_FILENO);
     dup2(fd[1], STDOUT_FILENO);
-    close(fd[0]);
     getp = get_path(av[2], env);
     execve(getp, command, env);
     free(getp);
     free(command);
+    free(*command);
 }
 
 void pipex(char **av, char **env, t_pipe pip)
@@ -33,12 +34,18 @@ void pipex(char **av, char **env, t_pipe pip)
     int id;
     int id2;
 
-    if (pip.file1 < 0 || pip.file2 < 0)
+    pip.file1 = open(av[1], O_RDONLY);
+    if (pip.file1 < 0)
+        return(perror("\e[0;31mError\e[0;37m"));
+    pip.file2 = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+    if (pip.file2 < 0)
+        return(perror("\e[0;31m Error\e[0;37m"));
+    if (pip.file1 <= 0 || pip.file2 <= 0)
         exit(-1);
     pipe(fd);
     id = fork();
     if (id < 0)
-        return(perror("Error creating fork!"));
+        return(perror("\e[0;31m Error creating fork!\e[0;31m"));
     if (id == 0)
         argument1(pip, env, fd, av);
     wait(0);
@@ -54,14 +61,15 @@ void argument2(t_pipe pip, char **env, int *fd, char **av)
     char *getp;
     char **command;
 
+    close(fd[1]);
     command = ft_split(av[2], ' ');
     dup2(pip.file2, STDOUT_FILENO);
     dup2(fd[0], STDIN_FILENO);
-    close(fd[1]);
     getp = get_path(av[3], env);
     execve(getp, command, env);
     free(getp);
     free(command);
+    free(*command);
 }
 
 char *get_path(char *command, char **env)
@@ -84,9 +92,7 @@ char *get_path(char *command, char **env)
         str = NULL;
     }
     if (!str)
-    {
-        perror("Command not found");
-    }
+        perror("\e[0;31m Command path not found\e[0;37m");
     free_list(path);
     return(str);
 }

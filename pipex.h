@@ -6,12 +6,12 @@
 /*   By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:03:45 by eduarodr          #+#    #+#             */
-/*   Updated: 2023/05/05 16:50:55 by eduarodr         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:38:37 by eduarodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
- #define PIPXEX_h
+ #define PIPEX_H
 
 # include <unistd.h>
 # include <stdio.h>
@@ -20,12 +20,12 @@
 # include <sys/wait.h>
 
 typedef struct s_pipe{
-    int file1;
-    int cmd1;
-    int file2;
-    int cmd2;
-    char *envpath;
-}   t_pipe  ;
+	int file1;
+	int cmd1;
+	int file2;
+	int cmd2;
+	char *envpath;
+}	t_pipe  ;
 
 
 void argument2(t_pipe pip, char **env, int *fd, char **av);
