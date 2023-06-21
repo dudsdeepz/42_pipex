@@ -6,7 +6,7 @@
 #    By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 13:03:40 by eduarodr          #+#    #+#              #
-#    Updated: 2023/05/15 16:14:25 by eduarodr         ###   ########.fr        #
+#    Updated: 2023/06/21 16:44:01 by eduarodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,12 @@ CC = cc
 
 RM = rm -f
 
-CCFLAGS = -Werror -Wextra -Werror
+CFLAGS = -Werror -Wextra -Werror
 
 all: ${NAME}
 
 $(NAME):	$(OBJ)
-	$(CC) $(CCFLAGS) $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)

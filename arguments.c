@@ -6,7 +6,7 @@
 /*   By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:06:46 by eduarodr          #+#    #+#             */
-/*   Updated: 2023/06/09 14:19:23 by eduarodr         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:49:20 by eduarodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void argument1(t_pipe pip, char **env, int *fd, char **av)
     getp = get_path(av[2], env);
     execve(getp, command, env);
     free(getp);
-    free(command);
-    free(*command);
+    free_path(command);
+    close(fd[1]);
+    exit(1);
 }
 
 void pipex(char **av, char **env, t_pipe pip)
@@ -35,13 +36,11 @@ void pipex(char **av, char **env, t_pipe pip)
     int id2;
 
     pip.file1 = open(av[1], O_RDONLY);
-    if (pip.file1 < 0)
+    if (pip.file1 <= 0)
         return(perror("\e[0;31mError\e[0;37m"));
     pip.file2 = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-    if (pip.file2 < 0)
+    if (pip.file2 <= 0)
         return(perror("\e[0;31m Error\e[0;37m"));
-    if (pip.file1 <= 0 || pip.file2 <= 0)
-        exit(-1);
     pipe(fd);
     id = fork();
     if (id < 0)
@@ -54,6 +53,8 @@ void pipex(char **av, char **env, t_pipe pip)
         return(perror("Error creating second fork!"));
     if (id2 == 0)
         argument2(pip, env, fd, av);
+    close(pip.file1);
+    close(pip.file2);
 }
 
 void argument2(t_pipe pip, char **env, int *fd, char **av)
@@ -68,8 +69,9 @@ void argument2(t_pipe pip, char **env, int *fd, char **av)
     getp = get_path(av[3], env);
     execve(getp, command, env);
     free(getp);
-    free(command);
-    free(*command);
+    free_path(command);
+    close(fd[0]);
+    exit(1);
 }
 
 char *get_path(char *command, char **env)
@@ -93,11 +95,11 @@ char *get_path(char *command, char **env)
     }
     if (!str)
         perror("\e[0;31m Command path not found\e[0;37m");
-    free_list(path);
+    free_path(path);
     return(str);
 }
 
-void	free_list(char **list)
+void	free_path(char **list)
 {
 	int	i;
 

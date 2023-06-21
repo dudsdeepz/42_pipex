@@ -6,7 +6,7 @@
 /*   By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:25:58 by eduarodr          #+#    #+#             */
-/*   Updated: 2023/06/07 12:06:28 by eduarodr         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:40:02 by eduarodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**ft_split(const char *str, char c)
 char	*ft_substr(char const *s, int start, int len)
 {
 	char		*substring;
-	size_t		i;
+	int				i;
 
 	i = ft_strlen(s);
 	if (!(s))
