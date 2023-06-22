@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eduardo <eduardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:25:58 by eduarodr          #+#    #+#             */
-/*   Updated: 2023/06/21 17:31:15 by eduarodr         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:21:26 by eduardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**ft_split(const char *str, char c)
 	int		size;
 	int		j;
 	int		i;
-	
+
 	i = 0;
 	j = -1;
 	size = wdc(str, c);
@@ -70,7 +70,7 @@ char	**ft_split(const char *str, char c)
 char	*ft_substr(char const *s, int start, int len)
 {
 	char		*substring;
-	int				i;
+	int			i;
 
 	i = ft_strlen(s);
 	if (!(s))

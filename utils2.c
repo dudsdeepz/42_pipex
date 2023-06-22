@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eduardo <eduardo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:31:08 by eduarodr          #+#    #+#             */
-/*   Updated: 2023/06/21 19:14:38 by eduarodr         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:21:45 by eduardo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*triple_strjoin(char *s1, char *s2, char *s3)
 	return (res);
 }
 
-
 size_t	ft_strlen(const char *str)
 
 {
@@ -43,14 +42,12 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void close_all(int *fd, int i, char *getp, char **comand, t_pipe pip)
+void	close_all(int *fd, int i, char *getp, char **comand)
 {
-    free(getp);
-    free_path(comand);
-    close(pip.file1);
-    close(pip.file2);
-    close(fd[i]);
-    close(STDIN_FILENO);
-    close(STDOUT_FILENO);       
-    exit(1);
+	free(getp);
+	free_path(comand);
+	close(fd[i]);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	exit(1);
 }
