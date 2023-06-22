@@ -6,7 +6,7 @@
 /*   By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:25:58 by eduarodr          #+#    #+#             */
-/*   Updated: 2023/06/21 16:40:02 by eduarodr         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:31:15 by eduarodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,35 +106,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	if (n == 0)
 		return (0);
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-char	*triple_strjoin(char *s1, char *s2, char *s3)
-{
-	char	*res;
-	int		i;
-
-	i = 0;
-	if (!s1 || !s2 || !s3)
-		return (NULL);
-	res = malloc(ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + 1);
-	while (*s1)
-		res[i++] = *s1++;
-	while (*s2)
-		res[i++] = *s2++;
-	while (*s3)
-		res[i++] = *s3++;
-	res[i] = 0;
-	return (res);
-}
-
-
-size_t	ft_strlen(const char *str)
-
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
 }

@@ -6,7 +6,7 @@
 #    By: eduarodr <eduarodr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 13:03:40 by eduarodr          #+#    #+#              #
-#    Updated: 2023/06/21 16:44:01 by eduarodr         ###   ########.fr        #
+#    Updated: 2023/06/21 17:31:40 by eduarodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 SRC = pipex.c\
 		arguments.c\
 		utils.c\
+		utils2.c\
 
 OBJ = ${SRC:.c=.o}
 
